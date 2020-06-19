@@ -19,15 +19,17 @@
 
     if($event->name!=null){
         
-        $event_arr = array(
+        $event_item = array(
             "id" => $event->id,
             'name' => $event->name,
             "description" => $event->description,
-            "location" => $event->location
+            "location" => $event->location,
+            "numberOfTickets" => $event->numberOfTickets,
+            "date" => $event->date,
         );
 
         http_response_code(200);
-        echo json_encode($event_arr);
+        echo json_encode($event_item);
     }
     else{
         http_response_code(404);

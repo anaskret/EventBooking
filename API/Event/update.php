@@ -20,6 +20,8 @@
     $event->name = $data->name; 
     $event->description = $data->description; 
     $event->location = $data->location; 
+    $event->numberOfTickets = $data->numberOfTickets; 
+    $event->date = $data->date; 
 
     if($event->update()){
         http_response_code(200);
@@ -28,6 +30,5 @@
     else{
         http_response_code(503);
         echo json_encode(array("message" => "Unable to update event"));
-        echo json_encode(array("message" => $event));
     }
 ?>

@@ -26,7 +26,9 @@
                 "id" => $id,
                 "name" => $name,
                 "description" =>$description, 
-                "location" =>$location 
+                "location" =>$location,
+                "numberOfTickets" =>$numberOfTickets,
+                "date" =>$date 
             );
 
             array_push($events_arr["records"], $event_item);
