@@ -37,6 +37,7 @@
             http_response_code(201);
 
             echo json_encode(array("message" => "You booked a reservation."));
+            echo json_encode(array("reservation" => $reservation));
         }
         else{
             http_response_code(503);
