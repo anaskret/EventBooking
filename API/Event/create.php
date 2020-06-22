@@ -20,14 +20,14 @@
         !empty($data->name) &&
         !empty($data->description) &&
         !empty($data->location) &&
-        !empty($data->numberOfTickets) &&
+        !empty($data->numberOfReservations) &&
         !empty($data->date)
     ){
         $event->id= $data->id;
         $event->name = $data->name;
         $event->description = $data->description;
         $event->location = $data->location;
-        $event->numberOfTickets = $data->numberOfTickets;
+        $event->numberOfReservations = $data->numberOfReservations;
         $event->date = $data->date;
 
         if($event->create()){

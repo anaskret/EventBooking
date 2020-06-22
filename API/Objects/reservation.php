@@ -1,9 +1,9 @@
 <?php
-class Ticket{
+class Reservation{
   
         // database connection and table name
         private $conn;
-        private $table_name = "ticket";
+        private $table_name = "reservation";
     
         // object properties
         public $id;
@@ -11,7 +11,8 @@ class Ticket{
         public $lastName;
         public $email;
         public $phoneNumber;
-        public $ticketTypeId;
+        public $umberOfReservations;
+        public $reservationTypeId;
 
     
         // constructor with $db as database connection
@@ -21,7 +22,7 @@ class Ticket{
 
         function read(){
 
-            $query = "SELECT `id`, `firstName` , `lastName`, `email`, `phoneNumber`, `ticketTypeId` FROM `ticket`";
+            $query = "SELECT `id`, `firstName` , `lastName`, `email`, `phoneNumber`, numberOfReservations,`reservationTypeId` FROM `reservation`";
     
             $stmt = $this->conn->prepare($query);
     
@@ -31,7 +32,7 @@ class Ticket{
         }
         function readOne(){
 
-            $query = "SELECT `id`, `firstName`, `lastName`, `email`, `phoneNumber`, `ticketTypeId` FROM " . $this->table_name . " WHERE id = ?";
+            $query = "SELECT `id`, `firstName`, `lastName`, `email`, `phoneNumber`, numberOfReservations, `reservationTypeId` FROM " . $this->table_name . " WHERE id = ?";
     
             $stmt = $this->conn->prepare($query);
             
@@ -45,12 +46,13 @@ class Ticket{
             $this->lastName = $row['lastName'];
             $this->email = $row['email'];
             $this->phoneNumber = $row['phoneNumber'];
-            $this->ticketTypeId = $row['ticketTypeId'];
+            $this->numberOfReservations = $row['numberOfReservations'];
+            $this->reservationTypeId = $row['reservationTypeId'];
     
         }
 
         function create(){
-            $query = "INSERT INTO " . $this->table_name . " SET id=:id, firstName=:firstName, lastName=:lastName, email=:email, phoneNumber=:phoneNumber, ticketTypeId=:ticketTypeId";
+            $query = "INSERT INTO " . $this->table_name . " SET id=:id, firstName=:firstName, lastName=:lastName, email=:email, phoneNumber=:phoneNumber, numberOfReservations=:numberOfReservations, reservationTypeId=:reservationTypeId";
             $stmt = $this->conn->prepare($query);
             
             $stmt->bindParam(":id", $this->id);
@@ -58,7 +60,8 @@ class Ticket{
             $stmt->bindParam(":lastName", $this->lastName);
             $stmt->bindParam(":email", $this->email);
             $stmt->bindParam(":phoneNumber", $this->phoneNumber);
-            $stmt->bindParam(":ticketTypeId", $this->ticketTypeId);
+            $stmt->bindParam(":numberOfReservations", $this->numberOfReservations);
+            $stmt->bindParam(":reservationTypeId", $this->reservationTypeId);
     
             if($stmt->execute()){
                 return true;
@@ -69,15 +72,17 @@ class Ticket{
     
         function update(){
             $query = "UPDATE " . $this->table_name . 
-                    " SET firstName = :firstName, lastName = :lastName, email = :email, phoneNumber = :phoneNumber, ticketTypeId = :ticketTypeId WHERE id = :id";
+                    " SET firstName = :firstName, lastName = :lastName, email = :email, phoneNumber = :phoneNumber, numberOfReservations=:numberOfReservations, reservationTypeId = :reservationTypeId WHERE id = :id";
     
             $stmt = $this->conn->prepare($query);
     
+            $stmt->bindParam(":id", $this->id);
             $stmt->bindParam(":firstName", $this->firstName);
             $stmt->bindParam(":lastName", $this->lastName);
             $stmt->bindParam(":email", $this->email);
             $stmt->bindParam(":phoneNumber", $this->phoneNumber);
-            $stmt->bindParam(":ticketTypeId", $this->ticketTypeId);
+            $stmt->bindParam(":numberOfReservations", $this->numberOfReservations);
+            $stmt->bindParam(":reservationTypeId", $this->reservationTypeId);
     
             if($stmt->execute()){
                 return true;

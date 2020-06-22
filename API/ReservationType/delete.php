@@ -6,21 +6,23 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../config/database.php';
-    include_once '../objects/ticket.php';
+    include_once '../objects/reservationtype.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $ticket = new Ticket($db);
+    $type = new ReservationType($db);
 
-    $ticket->id = isset($_GET['id']) ? $_GET['id'] : die();
+    $type->id = isset($_GET['id']) ? $_GET['id'] : die();
 
-    if($ticket->delete()){
+    if($type->delete()){
+
         http_response_code(200);
-        echo json_encode(array("message" => "Ticket was deleted successfully!"));
+        echo json_encode(array("message" => "reservation type was deleted"));
     }
     else{
+        
         http_response_code(503);
-        echo json_encode(array("message" => "Unable to delete the event"));
+        echo json_encode(array("message" => "Unable to delete reservation type"));
     }
 ?>

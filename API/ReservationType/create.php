@@ -3,12 +3,12 @@
     header("Content-Type: application/json; charset=UTF-8");
 
     include_once '../config/database.php';
-    include_once '../objects/tickettype.php';
+    include_once '../objects/reservationtype.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $type = new Tickettype($db);
+    $type = new ReservationType($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
@@ -29,19 +29,19 @@
 
             http_response_code(201);
 
-            echo json_encode(array("message" => "Ticket type was created."));
+            echo json_encode(array("message" => "Reservation type was created."));
         }
         else{
 
             http_response_code(503);
            // echo json_encode(array("message" => $type->error_get_last));
-            echo json_encode(array("message" => "Unable to create ticket type."));
+            echo json_encode(array("message" => "Unable to create reservation type."));
         }
     }
     else{
         
         http_response_code(400);
 
-        echo json_encode(array("message" => "Unable to create ticket type. Data is incomplete"));
+        echo json_encode(array("message" => "Unable to create reservation type. Data is incomplete"));
     }
 ?>

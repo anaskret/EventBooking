@@ -7,7 +7,7 @@ class Event{
     public $name;
     public $description;
     public $location;
-    public $numberOfTickets;
+    public $numberOfReservations;
     public $date;
 
     public function __construct($db){
@@ -15,7 +15,7 @@ class Event{
     }
     function read(){
 
-        $query = "SELECT `id`, `name` , `description`, `location`, `numberOfTickets`, `date` FROM `event`";
+        $query = "SELECT `id`, `name` , `description`, `location`, `numberOfReservations`, `date` FROM `event`";
 
         $stmt = $this->conn->prepare($query);
 
@@ -26,7 +26,7 @@ class Event{
 
     function readOne(){
 
-        $query = "SELECT `id`, `name` , `description`, `location`, `numberOfTickets`, `date` FROM " . $this->table_name . " WHERE id = ?";
+        $query = "SELECT `id`, `name` , `description`, `location`, `numberOfReservations`, `date` FROM " . $this->table_name . " WHERE id = ?";
 
         $stmt = $this->conn->prepare($query);
         
@@ -39,12 +39,13 @@ class Event{
         $this->name = $row['name'];
         $this->description = $row['description'];
         $this->location = $row['location'];
-        $this->numberOfTickets = $row['numberOfTickets'];
+        $this->numberOfReservations = $row['numberOfReservations'];
         $this->date = $row['date'];
 
     }
     function create(){
-        $query = "INSERT INTO " . $this->table_name . " SET id=:id, name=:name, description=:description, location=:location, numberOfTickets=:numberOfTickets, date=:date";
+        $query = "INSERT INTO " . $this->table_name . 
+        " SET id=:id, name=:name, description=:description, location=:location, numberOfReservations=:numberOfReservations, date=:date";
         
         $stmt = $this->conn->prepare($query);
         
@@ -52,19 +53,20 @@ class Event{
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":location", $this->location);
-        $stmt->bindParam(":numberOfTickets", $this->numberOfTickets);
+        $stmt->bindParam(":numberOfReservations", $this->numberOfReservations);
         $stmt->bindParam(":date", $this->date);
 
         if($stmt->execute()){
             return true;
         }
-
+        
+       //echo json_encode(array("message" => $stmt->errorInfo()));
         return false;
     }
 
     function update(){
         $query = "UPDATE " . $this->table_name . 
-                " SET name = :name, description = :description, location = :location, numberOfTickets=:numberOfTickets, date=:date WHERE id = :id";
+                " SET name = :name, description = :description, location = :location, numberOfReservations=:numberOfReservations, date=:date WHERE id = :id";
 
         $stmt = $this->conn->prepare($query);
 
@@ -72,7 +74,7 @@ class Event{
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":location", $this->location);
-        $stmt->bindParam(":numberOfTickets", $this->numberOfTickets);
+        $stmt->bindParam(":numberOfReservations", $this->numberOfReservations);
         $stmt->bindParam(":date", $this->date);
 
         if($stmt->execute()){

@@ -16,11 +16,10 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $event->id = $data->id;
-
     $event->name = $data->name; 
     $event->description = $data->description; 
     $event->location = $data->location; 
-    $event->numberOfTickets = $data->numberOfTickets; 
+    $event->numberOfReservations = $data->numberOfReservations; 
     $event->date = $data->date; 
 
     if($event->update()){

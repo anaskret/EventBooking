@@ -27,7 +27,7 @@
                 "name" => $name,
                 "description" =>$description, 
                 "location" =>$location,
-                "numberOfTickets" =>$numberOfTickets,
+                "numberOfReservations" =>$numberOfReservations,
                 "date" =>$date 
             );
 

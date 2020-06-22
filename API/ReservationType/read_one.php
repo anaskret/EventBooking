@@ -6,12 +6,12 @@
     header('Content-Type: application/json');
 
     include_once '../config/database.php';
-    include_once '../objects/tickettype.php';
+    include_once '../objects/reservationtype.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $type = new Tickettype($db);
+    $type = new ReservationType($db);
 
     $type->id = isset($_GET['id']) ? $_GET['id'] : die();
 
@@ -33,6 +33,6 @@
     else{
 
         http_response_code(404);
-        echo json_encode(array("message" => "Ticket type with given ID doesn't exist"));
+        echo json_encode(array("message" => "reservation type with given ID doesn't exist"));
     }
 ?>

@@ -1,7 +1,7 @@
 <?php
-class TicketType{
+class ReservationType{
     private $conn;
-    private $table_name = "tickettype";
+    private $table_name = "reservationtype";
 
     public $id;
     public $name;
@@ -15,7 +15,7 @@ class TicketType{
 
     function read(){
 
-        $query = "SELECT id, name, price, numberAvailable, eventId FROM tickettype";
+        $query = "SELECT id, name, price, numberAvailable, eventId FROM reservationtype";
 
         $stmt = $this->conn->prepare($query);
 
@@ -26,7 +26,7 @@ class TicketType{
 
     function readOne(){
 
-        $query = "SELECT id, name, price, numberAvailable, eventId FROM tickettype WHERE id = ?";
+        $query = "SELECT id, name, price, numberAvailable, eventId FROM reservationtype WHERE id = ?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id);
@@ -43,7 +43,7 @@ class TicketType{
     function create(){
 
         $query = "INSERT INTO " . $this->table_name . 
-        " SET name=:name, price=:price, numberAvailable=:numberAvailable, eventId=:eventId";
+        " SET id=:id, name=:name, price=:price, numberAvailable=:numberAvailable, eventId=:eventId";
 
         $stmt = $this->conn->prepare($query);
 
@@ -96,7 +96,7 @@ class TicketType{
 
     function maxAvailable(){
 
-        $query = "SElECT numberOfTickets FROM event WHERE id = ?";
+        $query = "SElECT numberOfreservations FROM event WHERE id = ?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->eventId);

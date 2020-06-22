@@ -24,7 +24,7 @@
             'name' => $event->name,
             "description" => $event->description,
             "location" => $event->location,
-            "numberOfTickets" => $event->numberOfTickets,
+            "numberOfReservations" => $event->numberOfReservations,
             "date" => $event->date,
         );
 
