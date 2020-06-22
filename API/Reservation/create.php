@@ -37,7 +37,7 @@
             http_response_code(201);
 
             echo json_encode(array("message" => "You booked a reservation."));
-            echo json_encode(array("reservation" => $reservation));
+            echo json_encode(array("addReservation" => $reservation));
         }
         else{
             http_response_code(503);
@@ -46,6 +46,6 @@
     }
     else{
         http_response_code(400);
-        echo json_encode(array("message" => "Unable to buy reservation."));
+        echo json_encode(array("message" => "Unable to acquire reservation."));
     }
 ?>

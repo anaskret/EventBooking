@@ -11,7 +11,7 @@ class Reservation{
         public $lastName;
         public $email;
         public $phoneNumber;
-        public $umberOfReservations;
+        public $numberOfReservations;
         public $reservationTypeId;
 
     
