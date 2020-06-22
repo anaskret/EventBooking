@@ -16,12 +16,14 @@
     $data = json_decode(file_get_contents("php://input"));
 
     if(
+        !empty($data->id) $$
         !empty($data->firstName) &&
         !empty($data->lastName) &&
         !empty($data->email) &&
         !empty($data->phoneNumber) &&
         !empty($data->ticketTypeId)
     ){
+        $ticket->id= $data->id;
         $ticket->firstName = $data->firstName;
         $ticket->lastName = $data->lastName;
         $ticket->email = $data->email;

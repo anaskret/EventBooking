@@ -47,6 +47,7 @@ class TicketType{
 
         $stmt = $this->conn->prepare($query);
 
+        $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":price", $this->price);
         $stmt->bindParam(":numberAvailable", $this->numberAvailable);
@@ -62,7 +63,7 @@ class TicketType{
     function update(){
 
         $query = "UPDATE " . $this->table_name . 
-        " SET name=:name, price=:price, numberAvailable=:numberAvailable, eventId=:eventId WHERE id =:id";
+        " SET id=:id, name=:name, price=:price, numberAvailable=:numberAvailable, eventId=:eventId WHERE id =:id";
 
         $stmt = $this->conn->prepare($query);
 
@@ -91,6 +92,17 @@ class TicketType{
         }
         
         return false;
+    }
+
+    function maxAvailable(){
+
+        $query = "SElECT numberOfTickets FROM event WHERE id = ?";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->eventId);
+        $stmt->execute();
+        
+        return $stmt;
     }
 }
 ?>

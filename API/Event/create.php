@@ -16,12 +16,14 @@
     $data = json_decode(file_get_contents("php://input"));
 
     if(
+        !empty($data->id) &&
         !empty($data->name) &&
         !empty($data->description) &&
         !empty($data->location) &&
         !empty($data->numberOfTickets) &&
         !empty($data->date)
     ){
+        $event->id= $data->id;
         $event->name = $data->name;
         $event->description = $data->description;
         $event->location = $data->location;

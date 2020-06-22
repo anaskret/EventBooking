@@ -50,9 +50,10 @@ class Ticket{
         }
 
         function create(){
-            $query = "INSERT INTO " . $this->table_name . " SET firstName=:firstName, lastName=:lastName, email=:email, phoneNumber=:phoneNumber, ticketTypeId=:ticketTypeId";
+            $query = "INSERT INTO " . $this->table_name . " SET id=:id, firstName=:firstName, lastName=:lastName, email=:email, phoneNumber=:phoneNumber, ticketTypeId=:ticketTypeId";
             $stmt = $this->conn->prepare($query);
             
+            $stmt->bindParam(":id", $this->id);
             $stmt->bindParam(":firstName", $this->firstName);
             $stmt->bindParam(":lastName", $this->lastName);
             $stmt->bindParam(":email", $this->email);

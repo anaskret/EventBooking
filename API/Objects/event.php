@@ -44,10 +44,11 @@ class Event{
 
     }
     function create(){
-        $query = "INSERT INTO " . $this->table_name . " SET name=:name, description=:description, location=:location, numberOfTickets=:numberOfTickets, date=:date";
+        $query = "INSERT INTO " . $this->table_name . " SET id=:id, name=:name, description=:description, location=:location, numberOfTickets=:numberOfTickets, date=:date";
         
         $stmt = $this->conn->prepare($query);
         
+        $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":location", $this->location);

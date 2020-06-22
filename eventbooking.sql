@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 19 Cze 2020, 12:51
+-- Czas generowania: 22 Cze 2020, 18:21
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.4.3
 
@@ -29,20 +29,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `event` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
   `location` varchar(70) NOT NULL,
   `numberOfTickets` int(10) UNSIGNED NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `event`
---
-
-INSERT INTO `event` (`id`, `name`, `description`, `location`, `numberOfTickets`, `date`) VALUES
-(1, 'testName', 'testDescription', 'testLocation', 123456, '2020-11-13');
 
 -- --------------------------------------------------------
 
@@ -51,12 +44,12 @@ INSERT INTO `event` (`id`, `name`, `description`, `location`, `numberOfTickets`,
 --
 
 CREATE TABLE `ticket` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` varchar(255) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `lastName` varchar(40) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phoneNumber` varchar(9) NOT NULL,
-  `ticketTypeId` int(11) UNSIGNED NOT NULL
+  `ticketTypeId` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -66,19 +59,12 @@ CREATE TABLE `ticket` (
 --
 
 CREATE TABLE `tickettype` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` varchar(255) NOT NULL,
   `name` varchar(20) NOT NULL,
   `price` int(11) UNSIGNED NOT NULL,
   `numberAvailable` int(11) UNSIGNED NOT NULL,
-  `eventId` int(11) UNSIGNED NOT NULL
+  `eventId` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `tickettype`
---
-
-INSERT INTO `tickettype` (`id`, `name`, `price`, `numberAvailable`, `eventId`) VALUES
-(5, 'standard', 25, 1234, 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -103,28 +89,6 @@ ALTER TABLE `ticket`
 ALTER TABLE `tickettype`
   ADD PRIMARY KEY (`id`),
   ADD KEY `eventId` (`eventId`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT dla tabeli `event`
---
-ALTER TABLE `event`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT dla tabeli `ticket`
---
-ALTER TABLE `ticket`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT dla tabeli `tickettype`
---
-ALTER TABLE `tickettype`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ograniczenia dla zrzutów tabel
